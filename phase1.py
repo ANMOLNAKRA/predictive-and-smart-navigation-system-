@@ -24,14 +24,36 @@ print(f"route contains {len(route)} nodes")
 
 m = folium.Map(location=[source_lat,source_lon],zoom_start = 13)
 
-route_coords =[]
+route_points = []
 
-for node in route:
-    route_coords.append((G.nodes[node]["y"],G.nodes[node]["x"]))
+for u, v in zip(route[:-1], route[1:]):
+
+    edge = min(
+        G.get_edge_data(u, v).values(),
+        key=lambda x: x["length"]
+    )
+
+    if "geometry" in edge:
+        xs, ys = edge["geometry"].xy
+
+        for x, y in zip(xs, ys):
+            route_points.append((y, x))
+
+    else:
+        route_points.append(
+            (
+                G.nodes[u]["y"],
+                G.nodes[u]["x"]
+            )
+        )
 
 
 
-folium.PolyLine(route_coords,weight=5).add_to(m)
+folium.PolyLine(
+    route_points,
+    weight=5,
+    color="blue"
+).add_to(m)
 
 folium.Marker([source_lat, source_lon],popup="Start").add_to(m)
 
