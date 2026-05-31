@@ -14,11 +14,11 @@ print(f"number of edges: {G.number_of_nodes()}")
 source_lat, source_lon = 12.9698, 77.7500
 dest_lat, dest_lon = 12.9900, 77.7300
 
-source_node = ox.distance.nearest_nodes(G,x = source_lat , y = source_lon)
+source_node = ox.distance.nearest_nodes(G, X = source_lat , Y = source_lon)
 
-dest_node = ox.distance.nearest_nodes(G, x = dest_lat , y= dest_lon)
+dest_node = ox.distance.nearest_nodes(G, X = dest_lat , Y = dest_lon)
 
-route = nx.astar_path(G,source_node,dest_node,weight = "length")
+route = nx.astar_path(G,source_node,dest_node, weight = "length")
 
 print(f"route contains {len(route)} nodes")
 
@@ -35,7 +35,7 @@ folium.PolyLine(route_coords,weight=5).add_to(m)
 
 folium.Marker([source_lat, source_lon],popup="Start").add_to(m)
 
-folium.Marker([dest_lat,dest_lon],popup = "End".add_to(m))
+folium.Marker([dest_lat,dest_lon],popup = "End").add_to(m)
 
 m.save("route_map_for_sample.html")
 
