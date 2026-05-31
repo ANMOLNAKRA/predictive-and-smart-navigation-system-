@@ -14,9 +14,9 @@ print(f"number of edges: {G.number_of_nodes()}")
 source_lat, source_lon = 12.9698, 77.7500
 dest_lat, dest_lon = 12.9900, 77.7300
 
-source_node = ox.distance.nearest_nodes(G, X = source_lat , Y = source_lon)
+source_node = ox.distance.nearest_nodes(G, X = source_lon , Y = source_lat)
 
-dest_node = ox.distance.nearest_nodes(G, X = dest_lat , Y = dest_lon)
+dest_node = ox.distance.nearest_nodes(G, X = dest_lon , Y = dest_lat)
 
 route = nx.astar_path(G,source_node,dest_node, weight = "length")
 
