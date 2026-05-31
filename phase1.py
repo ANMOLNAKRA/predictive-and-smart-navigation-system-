@@ -26,7 +26,7 @@ m = folium.Map(location=[source_lat,source_lon],zoom_start = 13)
 
 route_coords =[]
 
-for node in route_coords:
+for node in route:
     route_coords.append((G.nodes[node]["y"],G.nodes[node]["x"]))
 
 
